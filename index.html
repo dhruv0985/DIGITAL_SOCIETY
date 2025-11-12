@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traditional Crafts of Rajasthan: Artisan Stories</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Particle Background -->
+    <canvas id="particles"></canvas>
+
+    <!-- Home Page -->
+    <div class="home-page" id="homePage">
+        <div class="home-content">
+            <h1 class="home-title">Traditional Crafts of Rajasthan</h1>
+            <p class="home-subtitle">Stories from the Artisan's Workshop</p>
+            <div class="home-description">
+                <p>Welcome to a journey through the vibrant world of Rajasthan's traditional crafts. Explore the rich heritage of skilled artisans who have preserved ancient techniques passed down through generations.</p>
+                <p>From the blue pottery of Jaipur to the intricate block printing of Bagru, discover how these crafts continue to shape local culture and provide livelihoods for communities across the state.</p>
+            </div>
+            <div class="home-features">
+                <div class="feature-card" id="featureCard1">
+                    <div class="feature-icon">🗺️</div>
+                    <h3>18 Craft Locations</h3>
+                    <p>Explore traditional crafts across Rajasthan</p>
+                </div>
+                <div class="feature-card" id="featureCard2">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Artisan Stories</h3>
+                    <p>Learn about the people behind the crafts</p>
+                </div>
+                <div class="feature-card" id="featureCard3">
+                    <div class="feature-icon">✨</div>
+                    <h3>Living Traditions</h3>
+                    <p>Discover crafts that shape daily life</p>
+                </div>
+            </div>
+            <button class="home-cta" id="startExploring">Start Exploring</button>
+        </div>
+    </div>
+
+    <!-- Main Map Container -->
+    <div class="map-container" id="mapContainer" style="display: none;">
+        <!-- Navigation -->
+        <nav class="main-nav">
+            <div class="nav-logo">
+                <h1>Traditional Crafts of Rajasthan</h1>
+                <p>Stories from the Artisan's Workshop</p>
+            </div>
+            <div class="nav-controls">
+                <button class="nav-btn" id="goHome">Home</button>
+                <button class="nav-btn" id="toggleInfo">About</button>
+            </div>
+        </nav>
+
+        <!-- Interactive Map -->
+        <div class="interactive-map-view" id="mapView">
+            <!-- Rajasthan Map SVG - Accurate Outline from Wikimedia Commons -->
+            <svg class="rajasthan-map-svg" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <!-- Embed the accurate Rajasthan outline from Wikimedia Commons -->
+                <g class="rajasthan-outline-container">
+                    <image href="https://upload.wikimedia.org/wikipedia/commons/b/bc/Rajasthan-stub.svg" 
+                           x="50" 
+                           y="20" 
+                           width="700" 
+                           height="560" 
+                           preserveAspectRatio="xMidYMid meet"
+                           opacity="0.25"/>
+                </g>
+            </svg>
+
+            <!-- Map Instructions -->
+            <div class="map-instructions">
+                <p>Click on any location to explore traditional crafts</p>
+                <div class="instruction-icon">📍</div>
+            </div>
+            
+            <!-- Overlay SVG for Markers (positioned over background map) -->
+            <svg class="markers-overlay" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+                <!-- Craft Locations - Better Positioned for Rajasthan Map -->
+                <g class="craft-locations">
+                    <!-- Jaipur - Blue Pottery (East Central) -->
+                    <g class="craft-marker" data-location="jaipur-blue-pottery">
+                        <circle class="pulse-ring" cx="515" cy="240" r="22" fill="none" stroke="#d4a574" stroke-width="2" opacity="0.6" pointer-events="none"/>
+                        <circle class="marker-dot" cx="515" cy="240" r="7" fill="#d4a574" pointer-events="all"/>
+                        <circle class="marker-center" cx="515" cy="240" r="3" fill="#fff" pointer-events="none"/>
+                        <text x="515" y="215" text-anchor="middle" class="location-label" fill="#d4a574" font-size="13" font-weight="600" pointer-events="none">Jaipur</text>
+                    </g>
+
+                    <!-- Bagru - Block Printing (Near Jaipur) -->
+                    <g class="craft-marker" data-location="bagru-block-printing">
+                        <circle class="pulse-ring" cx="510" cy="265" r="22" fill="none" stroke="#d4a574" stroke-width="2" opacity="0.6" pointer-events="none"/>
+                        <circle class="marker-dot" cx="510" cy="265" r="7" fill="#d4a574" pointer-events="all"/>
+                        <circle class="marker-center" cx="510" cy="265" r="3" fill="#fff" pointer-events="none"/>
+                        <text x="510" y="240" text-anchor="middle" class="location-label" fill="#d4a574" font-size="12" font-weight="600" pointer-events="none">Bagru</text>
+                    </g>
+
+                    <!-- Sanganer - Block Printing (Near Jaipur) -->
+                    <g class="craft-marker" data-location="sanganer-block-printing">
+                        <circle class="pulse-ring" cx="530" cy="260" r="22" fill="none" stroke="#d4a574" stroke-width="2" opacity="0.6" pointer-events="none"/>
+                        <circle class="marker-dot" cx="530" cy="260" r="7" fill="#d4a574" pointer-events="all"/>
+                        <circle class="marker-center" cx="530" cy="260" r="3" fill="#fff" pointer-events="none"/>
+                        <text x="530" y="235" text-anchor="middle" class="location-label" fill="#d4a574" font-size="12" font-weight="600" pointer-events="none">Sanganer</text>
+                    </g>
+
+                    <!-- Jodhpur - Leather Work (West Central) -->
+                    <g class="craft-marker" data-location="jodhpur-leather">
+                        <circle class="pulse-ring" cx="380" cy="280" r="22" fill="none" stroke="#d4a574" stroke-width="2" opacity="0.6" pointer-events="none"/>
+                        <circle class="marker-dot" cx="380" cy="280" r="7" fill="#d4a574" pointer-events="all"/>
+                        <circle class="marker-center" cx="380" cy="280" r="3" fill="#fff" pointer-events="none"/>
+                        <text x="380" y="255" text-anchor="middle" class="location-label" fill="#d4a574" font-size="13" font-weight="600" pointer-events="none">Jodhpur</text>
+                    </g>
+
+                    <!-- Molela - Terracotta (South Central) -->
+                    <g class="craft-marker" data-location="molela-terracotta">
+                        <circle class="pulse-ring" cx="500" cy="380" r="22" fill="none" stroke="#d4a574" stroke-width="2" opacity="0.6" pointer-events="none"/>
+                        <circle class="marker-dot" cx="500" cy="380" r="7" fill="#d4a574" pointer-events="all"/>
+                        <circle class="marker-center" cx="500" cy="380" r="3" fill="#fff" pointer-events="none"/>
+                        <text x="500" y="355" text-anchor="middle" class="location-label" fill="#d4a574" font-size="12" font-weight="600" pointer-events="none">Molela</text>
+                    </g>
+
+                    <!-- Udaipur - Puppet Making (South) -->
+                    <g class="craft-marker" data-location="udaipur-puppets">
+                        <circle class="pulse-ring" cx="480" cy="400" r="22" fill="none" stroke="#d4a574" stroke-width="2" opacity="0.6" pointer-events="none"/>
+                        <circle class="marker-dot" cx="480" cy="400" r="7" fill="#d4a574" pointer-events="all"/>
+                        <circle class="marker-center" cx="480" cy="400" r="3" fill="#fff" pointer-events="none"/>
+                        <text x="480" y="375" text-anchor="middle" class="location-label" fill="#d4a574" font-size="13" font-weight="600" pointer-events="none">Udaipur</text>
+                    </g>
+
+                    <!-- Kishangarh - Miniature Painting (North East) -->
+                    <g class="craft-marker" data-location="kishangarh-miniature">
+                        <circle class="pulse-ring" cx="540" cy="220" r="22" fill="none" stroke="#d4a574" stroke-width="2" opacity="0.6" pointer-events="none"/>
+                        <circle class="marker-dot" cx="540" cy="220" r="7" fill="#d4a574" pointer-events="all"/>
+                        <circle class="marker-center" cx="540" cy="220" r="3" fill="#fff" pointer-events="none"/>
+                        <text x="540" y="195" text-anchor="middle" class="location-label" fill="#d4a574" font-size="12" font-weight="600" pointer-events="none">Kishangarh</text>
+                    </g>
+
+                    <!-- Sikar - Bandhani (North Central) -->
+                    <g class="craft-marker" data-location="sikar-bandhani">
+                        <circle class="pulse-ring" cx="490" cy="200" r="22" fill="none" stroke="#d4a574" stroke-width="2" opacity="0.6" pointer-events="none"/>
+                        <circle class="marker-dot" cx="490" cy="200" r="7" fill="#d4a574" pointer-events="all"/>
+                        <circle class="marker-center" cx="490" cy="200" r="3" fill="#fff" pointer-events="none"/>
+                        <text x="490" y="175" text-anchor="middle" class="location-label" fill="#d4a574" font-size="12" font-weight="600" pointer-events="none">Sikar</text>
+                    </g>
+
+                    <!-- Alwar - Metal Work (North East) -->
+                    <g class="craft-marker" data-location="alwar-metalwork">
+                        <circle class="pulse-ring" cx="560" cy="190" r="22" fill="none" stroke="#d4a574" stroke-width="2" opacity="0.6" pointer-events="none"/>
+                        <circle class="marker-dot" cx="560" cy="190" r="7" fill="#d4a574" pointer-events="all"/>
+                        <circle class="marker-center" cx="560" cy="190" r="3" fill="#fff" pointer-events="none"/>
+                        <text x="560" y="165" text-anchor="middle" class="location-label" fill="#d4a574" font-size="12" font-weight="600" pointer-events="none">Alwar</text>
+                    </g>
+
+                    <!-- Shekhawati - Wood Carving (North Central) -->
+                    <g class="craft-marker" data-location="shekhawati-wood">
+                        <circle class="pulse-ring" cx="470" cy="200" r="22" fill="none" stroke="#d4a574" stroke-width="2" opacity="0.6" pointer-events="none"/>
+                        <circle class="marker-dot" cx="470" cy="200" r="7" fill="#d4a574" pointer-events="all"/>
+                        <circle class="marker-center" cx="470" cy="200" r="3" fill="#fff" pointer-events="none"/>
+                        <text x="470" y="175" text-anchor="middle" class="location-label" fill="#d4a574" font-size="12" font-weight="600" pointer-events="none">Shekhawati</text>
+                    </g>
+
+                    <!-- Makrana - Marble Work (Central) -->
+                    <g class="craft-marker" data-location="makrana-marble">
+                        <circle class="pulse-ring" cx="450" cy="270" r="22" fill="none" stroke="#d4a574" stroke-width="2" opacity="0.6" pointer-events="none"/>
+                        <circle class="marker-dot" cx="450" cy="270" r="7" fill="#d4a574" pointer-events="all"/>
+                        <circle class="marker-center" cx="450" cy="270" r="3" fill="#fff" pointer-events="none"/>
+                        <text x="450" y="245" text-anchor="middle" class="location-label" fill="#d4a574" font-size="12" font-weight="600" pointer-events="none">Makrana</text>
+                    </g>
+
+                    <!-- Barmer - Embroidery (West) -->
+                    <g class="craft-marker" data-location="barmer-embroidery">
+                        <circle class="pulse-ring" cx="280" cy="330" r="22" fill="none" stroke="#d4a574" stroke-width="2" opacity="0.6" pointer-events="none"/>
+                        <circle class="marker-dot" cx="280" cy="330" r="7" fill="#d4a574" pointer-events="all"/>
+                        <circle class="marker-center" cx="280" cy="330" r="3" fill="#fff" pointer-events="none"/>
+                        <text x="280" y="305" text-anchor="middle" class="location-label" fill="#d4a574" font-size="12" font-weight="600" pointer-events="none">Barmer</text>
+                    </g>
+
+                    <!-- Bikaner - Camel Leather (North West) -->
+                    <g class="craft-marker" data-location="bikaner-camel-leather">
+                        <circle class="pulse-ring" cx="360" cy="190" r="22" fill="none" stroke="#d4a574" stroke-width="2" opacity="0.6" pointer-events="none"/>
+                        <circle class="marker-dot" cx="360" cy="190" r="7" fill="#d4a574" pointer-events="all"/>
+                        <circle class="marker-center" cx="360" cy="190" r="3" fill="#fff" pointer-events="none"/>
+                        <text x="360" y="165" text-anchor="middle" class="location-label" fill="#d4a574" font-size="12" font-weight="600" pointer-events="none">Bikaner</text>
+                    </g>
+
+                    <!-- Jaisalmer - Stone Carving (West) -->
+                    <g class="craft-marker" data-location="jaisalmer-stone">
+                        <circle class="pulse-ring" cx="240" cy="250" r="22" fill="none" stroke="#d4a574" stroke-width="2" opacity="0.6" pointer-events="none"/>
+                        <circle class="marker-dot" cx="240" cy="250" r="7" fill="#d4a574" pointer-events="all"/>
+                        <circle class="marker-center" cx="240" cy="250" r="3" fill="#fff" pointer-events="none"/>
+                        <text x="240" y="225" text-anchor="middle" class="location-label" fill="#d4a574" font-size="13" font-weight="600" pointer-events="none">Jaisalmer</text>
+                    </g>
+
+                    <!-- Nathdwara - Pichwai Paintings (South) -->
+                    <g class="craft-marker" data-location="nathdwara-pichwai">
+                        <circle class="pulse-ring" cx="495" cy="395" r="22" fill="none" stroke="#d4a574" stroke-width="2" opacity="0.6" pointer-events="none"/>
+                        <circle class="marker-dot" cx="495" cy="395" r="7" fill="#d4a574" pointer-events="all"/>
+                        <circle class="marker-center" cx="495" cy="395" r="3" fill="#fff" pointer-events="none"/>
+                        <text x="495" y="370" text-anchor="middle" class="location-label" fill="#d4a574" font-size="12" font-weight="600" pointer-events="none">Nathdwara</text>
+                    </g>
+
+                    <!-- Shahpura - Phad Paintings (Central) -->
+                    <g class="craft-marker" data-location="shahpura-phad">
+                        <circle class="pulse-ring" cx="505" cy="300" r="22" fill="none" stroke="#d4a574" stroke-width="2" opacity="0.6" pointer-events="none"/>
+                        <circle class="marker-dot" cx="505" cy="300" r="7" fill="#d4a574" pointer-events="all"/>
+                        <circle class="marker-center" cx="505" cy="300" r="3" fill="#fff" pointer-events="none"/>
+                        <text x="505" y="275" text-anchor="middle" class="location-label" fill="#d4a574" font-size="12" font-weight="600" pointer-events="none">Shahpura</text>
+                    </g>
+
+                    <!-- Pushkar - Silver Jewelry (Central) -->
+                    <g class="craft-marker" data-location="pushkar-jewelry">
+                        <circle class="pulse-ring" cx="485" cy="255" r="22" fill="none" stroke="#d4a574" stroke-width="2" opacity="0.6" pointer-events="none"/>
+                        <circle class="marker-dot" cx="485" cy="255" r="7" fill="#d4a574" pointer-events="all"/>
+                        <circle class="marker-center" cx="485" cy="255" r="3" fill="#fff" pointer-events="none"/>
+                        <text x="485" y="230" text-anchor="middle" class="location-label" fill="#d4a574" font-size="12" font-weight="600" pointer-events="none">Pushkar</text>
+                    </g>
+
+                    <!-- Dungarpur - Stone Carving (South) -->
+                    <g class="craft-marker" data-location="dungarpur-stone">
+                        <circle class="pulse-ring" cx="460" cy="420" r="22" fill="none" stroke="#d4a574" stroke-width="2" opacity="0.6" pointer-events="none"/>
+                        <circle class="marker-dot" cx="460" cy="420" r="7" fill="#d4a574" pointer-events="all"/>
+                        <circle class="marker-center" cx="460" cy="420" r="3" fill="#fff" pointer-events="none"/>
+                        <text x="460" y="395" text-anchor="middle" class="location-label" fill="#d4a574" font-size="12" font-weight="600" pointer-events="none">Dungarpur</text>
+                    </g>
+                </g>
+            </svg>
+        </div>
+
+        <!-- Content Panel - Page turning effect -->
+        <div class="content-panel" id="contentPanel">
+            <button class="close-panel" id="closePanel">&times;</button>
+            <div class="page-container" id="pageContainer">
+                <!-- Page 1: Photos -->
+                <div class="page page-photos" id="pagePhotos" data-page="0">
+                    <div class="page-content" id="photosContent">
+                        <!-- Photos will be loaded here -->
+                    </div>
+                    <div class="page-navigation">
+                        <div class="swipe-indicator">
+                            <span>← Swipe right for next</span>
+                        </div>
+                        <button class="nav-page-btn next-btn" data-next="1">
+                            <span>Next: Details</span>
+                            <span class="arrow">→</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- Page 2: Details -->
+                <div class="page page-details" id="pageDetails" data-page="1">
+                    <div class="page-content" id="detailsContent">
+                        <!-- Details will be loaded here -->
+                    </div>
+                    <div class="page-navigation">
+                        <button class="nav-page-btn prev-btn" data-prev="0">
+                            <span class="arrow">←</span>
+                            <span>Back: Photos</span>
+                        </button>
+                        <button class="nav-page-btn next-btn" data-next="2">
+                            <span>Next: More Info</span>
+                            <span class="arrow">→</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- Page 3: More Info -->
+                <div class="page page-more" id="pageMore" data-page="2">
+                    <div class="page-content" id="moreContent">
+                        <!-- More info will be loaded here -->
+                    </div>
+                    <div class="page-navigation">
+                        <button class="nav-page-btn prev-btn" data-prev="1">
+                            <span class="arrow">←</span>
+                            <span>Back: Details</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- About Panel -->
+        <div class="about-panel" id="aboutPanel">
+            <button class="close-about" id="closeAbout">&times;</button>
+            <div class="about-content">
+                <h2>About This Project</h2>
+                <p>This digital artifact explores the traditional crafts and artisans of Rajasthan—the skilled craftspeople who create everything from pottery to textiles, preserving techniques passed down through generations.</p>
+                <p>While Rajasthan is a major tourist destination, many aspects of local culture, practices, and everyday life remain underrepresented. This project focuses on traditional crafts—not as tourist souvenirs, but as living traditions that continue to shape local culture and provide livelihoods for communities across the state.</p>
+                <h3>Key Features</h3>
+                <ul>
+                    <li>18 craft locations across Rajasthan</li>
+                    <li>Interactive map exploration</li>
+                    <li>Stories from artisan workshops</li>
+                    <li>Everyday uses of traditional crafts</li>
+                    <li>Cultural preservation and heritage</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Animated Drawings Container -->
+        <div class="drawings-container">
+            <!-- Animated Craft Illustration -->
+            <svg class="craft-illustration" viewBox="0 0 400 400" id="craftDrawing">
+                <!-- Pottery Wheel -->
+                <circle class="wheel" cx="200" cy="250" r="60" fill="none" stroke="#d4a574" stroke-width="3" opacity="0.6"/>
+                <circle class="wheel-center" cx="200" cy="250" r="5" fill="#d4a574"/>
+                <!-- Pot -->
+                <ellipse class="pot" cx="200" cy="200" rx="30" ry="40" fill="#4a90e2" opacity="0.7">
+                    <animate attributeName="ry" values="40;45;40" dur="2s" repeatCount="indefinite"/>
+                </ellipse>
+                <!-- Hands -->
+                <ellipse class="hand" cx="170" cy="200" rx="15" ry="25" fill="#d4a574" opacity="0.6"/>
+                <ellipse class="hand" cx="230" cy="200" rx="15" ry="25" fill="#d4a574" opacity="0.6"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Location Content Data -->
+    <script type="application/json" id="locationData">
+    {
+        "jaipur-blue-pottery": {
+            "title": "Jaipur - The Pink City",
+            "craft": "Blue Pottery",
+            "theme": {"primary": "#e91e63", "secondary": "#c2185b", "accent": "#f48fb1"},
+            "images": [
+                {"url": "https://images.unsplash.com/photo-1603105037880-880cd4edf0d5?w=1200&h=800&fit=crop", "alt": "Jaipur Blue Pottery", "caption": "Traditional blue pottery workshop"},
+                {"url": "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=1200&h=800&fit=crop", "alt": "Jaipur City", "caption": "The Pink City of Jaipur"},
+                {"url": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=800&fit=crop", "alt": "Pottery Artisan", "caption": "Artisan crafting blue pottery"}
+            ],
+            "moreInfo": "<h2 style='color: var(--city-primary, #e91e63); margin-bottom: 1.5rem;'>Visit Jaipur's Blue Pottery Workshops</h2><div class='content-features'><div class='feature'><h3>📍 Best Workshops to Visit</h3><p>Visit Kripal Kumbh in the old city, one of the oldest blue pottery workshops in Jaipur. You can watch artisans at work, learn about the unique process, and purchase authentic pieces directly from the creators. Many workshops are located near Hawa Mahal and offer guided tours.</p></div><div class='feature'><h3>🎓 Learning Experiences</h3><p>Several workshops offer short-term courses where you can try your hand at blue pottery. Learn the basics of shaping, glazing, and painting under the guidance of master artisans. These workshops provide hands-on experience and deeper appreciation for this unique craft.</p></div><div class='feature'><h3>🛍️ Authentic Shopping</h3><p>When purchasing blue pottery, buying directly from workshops ensures fair compensation for artisans. Look for pieces with the traditional turquoise glaze and intricate patterns. Many artisans also participate in craft fairs and exhibitions throughout the year.</p></div><div class='feature'><h3>📸 Cultural Experience</h3><p>Visiting blue pottery workshops offers insight into Jaipur's cultural heritage. You'll witness living traditions, hear stories passed down through generations, and understand how this craft continues to shape local communities and preserve ancient techniques.</p></div></div>",
+            "content": "<h2>The Pink City's Blue Art</h2><p>Jaipur, known as the Pink City for its rose-hued architecture, is also home to unique blue pottery. Unlike typical pottery, Jaipur's blue pottery is made without clay—artisans use quartz, glass, and multani mitti (fuller's earth) to create these beautiful, turquoise-colored pieces.</p><div class='content-features'><div class='feature'><h3>🏺 Everyday Art</h3><p>While tourists buy decorative pieces, locals use these for daily storage—pickle jars, water pots, and kitchen containers that have been part of Rajasthani households for centuries. The pottery is both functional and beautiful.</p></div><div class='feature'><h3>👨‍👩‍👧‍👦 Family Tradition</h3><p>Most artisans are from families that have practiced this craft for generations, with skills passed down from parent to child, preserving techniques that date back to the 14th century when it was introduced from Central Asia.</p></div><div class='feature'><h3>🎨 Unique Process</h3><p>The craft involves no clay, making it unique. Artisans mix quartz stone powder, glass, multani mitti, and borax to create a smooth, glazed finish that's both durable and beautiful.</p></div></div>",
+            "enhancedDetails": "<h2 style='color: var(--city-primary, #e91e63); margin-bottom: 1.5rem;'>Cultural Significance & Modern Impact</h2><div class='content-features'><div class='feature'><h3>🏛️ Historical Context</h3><p>Blue pottery was introduced to Jaipur in the 14th century by Persian artisans. The craft flourished under the patronage of Maharaja Sawai Ram Singh II, who established workshops in the city. Today, it remains one of Jaipur's most distinctive crafts, with artisans continuing traditional methods while adapting to modern markets.</p></div><div class='feature'><h3>💼 Economic Impact</h3><p>The blue pottery industry provides livelihoods for over 200 artisans and their families. Many workshops are located in the old city, where artisans work in traditional settings. The craft has also gained international recognition, with pieces exported worldwide while maintaining its local cultural significance.</p></div><div class='feature'><h3>🌱 Sustainability</h3><p>Blue pottery is eco-friendly, using natural materials and traditional firing techniques. The process produces minimal waste, and the finished products are biodegradable. This makes it a sustainable craft that aligns with modern environmental values while preserving ancient techniques.</p></div><div class='feature'><h3>🎓 Learning the Craft</h3><p>Young artisans typically begin learning at age 12-14, spending years mastering the techniques. The learning process involves understanding material preparation, shaping, glazing, and firing. Master artisans pass down not just techniques but also the cultural stories and meanings behind the patterns and designs.</p></div></div>",
+            "stats": {"artisans": "200+", "workshops": "25+", "generations": "10+", "export_countries": "30+", "annual_production": "50,000+"}
+        },
+        "bagru-block-printing": {
+            "title": "Bagru - Block Printing Village",
+            "craft": "Block Printing",
+            "theme": {"primary": "#8d6e63", "secondary": "#6d4c41", "accent": "#a1887f"},
+            "images": [
+                {"url": "https://images.unsplash.com/photo-1588416478373-43d5c45eb12a?w=1200&h=800&fit=crop", "alt": "Block Printing", "caption": "Artisan hand-printing fabric"},
+                {"url": "https://images.unsplash.com/photo-1603105037880-880cd4edf0d5?w=1200&h=800&fit=crop", "alt": "Wooden Blocks", "caption": "Traditional wooden printing blocks"},
+                {"url": "https://images.unsplash.com/photo-1603105037880-880cd4edf0d5?w=1200&h=800&fit=crop", "alt": "Bagru Village", "caption": "Block printing workshop in Bagru"}
+            ],
+            "content": "<h2>Bagru's Block Printing Heritage</h2><p>Bagru's block printing is a labor-intensive craft where artisans hand-print intricate patterns using wooden blocks. The process involves natural dyes and traditional motifs that tell stories of Rajasthan's culture.</p><div class='content-features'><div class='feature'><h3>🌿 Natural Dyes</h3><p>Artisans use only natural dyes—pomegranate for yellow, indigo for blue, and madder for red. These eco-friendly methods have been used for over 400 years, creating vibrant, long-lasting colors.</p></div><div class='feature'><h3>👕 Daily Wear</h3><p>While tourists buy scarves and bedspreads, locals wear block-printed fabrics as everyday clothing, especially during festivals and special occasions. The patterns are part of cultural identity.</p></div><div class='feature'><h3>🏛️ Traditional Process</h3><p>The printing process involves multiple steps: fabric preparation, block carving, dye mixing, and hand printing. Each piece is unique, reflecting the artisan's skill and tradition.</p></div></div>",
+            "moreInfo": "<h2 style='color: var(--city-primary, #8d6e63); margin-bottom: 1.5rem;'>Experience Bagru's Block Printing</h2><div class='content-features'><div class='feature'><h3>📍 Village Workshops</h3><p>Bagru village is a living museum of block printing. Visit family-run workshops where you can see the entire process from block carving to final printing. The village atmosphere and traditional techniques offer an authentic experience of this 400-year-old craft.</p></div><div class='feature'><h3>🎓 Learn the Craft</h3><p>Many workshops offer hands-on experiences where visitors can try block printing themselves. Learn about natural dye preparation, block selection, and the precise technique of hand printing. This immersive experience helps you appreciate the skill required.</p></div><div class='feature'><h3>🛍️ Direct from Artisans</h3><p>Buying directly from Bagru workshops ensures you get authentic, hand-printed fabrics while supporting local artisans. Look for pieces with natural dyes and traditional Bagru patterns. Many artisans also participate in craft fairs in Jaipur and other cities.</p></div><div class='feature'><h3>📸 Cultural Immersion</h3><p>Visiting Bagru is not just about shopping—it's a journey into traditional Rajasthani village life. Experience the community spirit, see how families work together, and understand how this craft has sustained the village for generations.</p></div></div>",
+            "stats": {"workshops": "50+", "artisans": "300+", "patterns": "100+"}
+        },
+        "sanganer-block-printing": {
+            "title": "Sanganer - Fine Block Printing",
+            "craft": "Block Printing",
+            "theme": {"primary": "#5d4037", "secondary": "#3e2723", "accent": "#8d6e63"},
+            "images": [
+                {"url": "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=1200&h=800&fit=crop", "alt": "Sanganer Printing", "caption": "Fine floral block printing"},
+                {"url": "https://images.unsplash.com/photo-1603105037880-880cd4edf0d5?w=1200&h=800&fit=crop", "alt": "Printing Process", "caption": "Artisan at work in Sanganer"},
+                {"url": "https://images.unsplash.com/photo-1603105037880-880cd4edf0d5?w=1200&h=800&fit=crop", "alt": "Floral Patterns", "caption": "Intricate floral block patterns"}
+            ],
+            "content": "<h2>Sanganer's Fine Block Printing</h2><p>Sanganer is famous for its fine, detailed block printing, especially the delicate floral patterns. The craft village is a living workshop where you can see artisans at work every day.</p><div class='content-features'><div class='feature'><h3>🌸 Fine Details</h3><p>Sanganer prints are known for their intricate floral patterns, each block carved by hand. A single design can take weeks to carve, requiring immense skill and patience.</p></div><div class='feature'><h3>👨‍👩‍👧‍👦 Community Workspaces</h3><p>Entire families work together in open courtyards, with children learning the craft from a young age. It's not just a job—it's a way of life that binds the community together.</p></div><div class='feature'><h3>🎨 Floral Motifs</h3><p>The floral patterns are inspired by nature, with each flower and leaf carefully designed. These motifs have been passed down through generations, preserving traditional designs.</p></div></div>",
+            "moreInfo": "<h2 style='color: var(--city-primary, #5d4037); margin-bottom: 1.5rem;'>Discover Sanganer's Floral Printing</h2><div class='content-features'><div class='feature'><h3>📍 Craft Village Experience</h3><p>Sanganer is easily accessible from Jaipur and offers a unique craft village experience. Visit multiple workshops to see different families specializing in various floral patterns. The open courtyards where artisans work provide an authentic glimpse into traditional block printing.</p></div><div class='feature'><h3>🎓 Pattern Learning</h3><p>Many workshops allow visitors to observe the intricate process of creating floral patterns. Watch artisans carve blocks, mix dyes, and hand-print fabrics. Some workshops offer short courses where you can learn basic techniques and create your own printed piece.</p></div><div class='feature'><h3>🛍️ Fine Fabric Shopping</h3><p>Sanganer is known for producing some of the finest block-printed fabrics in Rajasthan. Purchase directly from workshops to get authentic pieces with traditional floral motifs. The quality and detail of Sanganer prints make them highly valued by collectors and textile enthusiasts.</p></div><div class='feature'><h3>📸 Family Traditions</h3><p>Experience how entire families work together in this craft. See children learning alongside their parents and grandparents, preserving techniques that have been passed down for generations. This intergenerational learning is what keeps Sanganer's craft traditions alive.</p></div></div>",
+            "stats": {"workshops": "80+", "artisans": "500+", "families": "200+"}
+        },
+        "jodhpur-leather": {
+            "title": "Jodhpur - The Blue City",
+            "craft": "Leather Work",
+            "theme": {"primary": "#2196f3", "secondary": "#1976d2", "accent": "#64b5f6"},
+            "images": [
+                {"url": "https://images.unsplash.com/photo-1539650116574-75c0c6d73669?w=1200&h=800&fit=crop", "alt": "Jodhpur Blue City", "caption": "The Blue City - Jodhpur's iconic blue houses"},
+                {"url": "https://images.unsplash.com/photo-1588416478373-43d5c45eb12a?w=1200&h=800&fit=crop", "alt": "Leather Craft", "caption": "Traditional leather mojris being crafted"},
+                {"url": "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=1200&h=800&fit=crop", "alt": "Leather Workshop", "caption": "Artisan in old city workshop"}
+            ],
+            "content": "<h2>The Blue City's Leather Art</h2><p>Jodhpur, known as the Blue City for its indigo-painted houses, is also famous for its leather craftsmanship. Artisans create everything from traditional mojris (footwear) to bags and belts in the old city's narrow blue lanes.</p><div class='content-features'><div class='feature'><h3>👢 Traditional Footwear</h3><p>Mojris and juttis made here are worn daily by locals. The intricate embroidery, comfortable fit, and breathable design make them perfect for Rajasthan's hot climate. Each pair is handcrafted with care.</p></div><div class='feature'><h3>🏘️ Old City Workshops</h3><p>Hidden in the blue lanes of Jodhpur's old city, small workshops continue traditional techniques. Artisans work in spaces passed down through families, preserving methods that have remained unchanged for centuries.</p></div><div class='feature'><h3>🎨 Craftsmanship</h3><p>The leather work combines traditional designs with modern needs. Artisans use techniques like hand-stitching, embossing, and intricate embroidery to create unique pieces that reflect Jodhpur's cultural heritage.</p></div></div>",
+            "enhancedDetails": "<h2 style='color: var(--city-primary, #2196f3); margin-bottom: 1.5rem;'>Craft Heritage & Community</h2><div class='content-features'><div class='feature'><h3>🏛️ Historical Roots</h3><p>Jodhpur's leather craft dates back to the 15th century when the city was a major trading center. The craft evolved to serve both the royal court and common people, creating a diverse range of products from royal saddles to everyday footwear. The old city's narrow lanes still house many of these traditional workshops.</p></div><div class='feature'><h3>👨‍👩‍👧‍👦 Family Workshops</h3><p>Most leather workshops are family-run businesses, with skills passed down through generations. Children learn the craft from a young age, starting with simple tasks and gradually mastering complex techniques. These workshops are not just workplaces but centers of community life and cultural preservation.</p></div><div class='feature'><h3>🌍 Global Recognition</h3><p>Jodhpur leather products have gained international fame, with mojris and juttis being exported worldwide. Despite global demand, artisans maintain traditional quality and techniques, ensuring each piece reflects authentic Rajasthani craftsmanship while meeting modern standards of comfort and durability.</p></div><div class='feature'><h3>🔄 Modern Adaptations</h3><p>While preserving traditional techniques, artisans have adapted to modern markets, creating contemporary designs alongside classic styles. The craft continues to evolve, with younger generations bringing new ideas while respecting the heritage and skills of their ancestors.</p></div></div>",
+            "moreInfo": "<h2 style='color: var(--city-primary, #2196f3); margin-bottom: 1.5rem;'>Explore Jodhpur's Leather Craft</h2><div class='content-features'><div class='feature'><h3>📍 Old City Workshops</h3><p>Explore the narrow blue lanes of Jodhpur's old city to find traditional leather workshops. Many are hidden in courtyards and small alleys, offering an authentic experience. Visit workshops near Clock Tower and Sardar Market to see artisans crafting mojris and juttis using traditional techniques.</p></div><div class='feature'><h3>🎓 Craft Workshops</h3><p>Some workshops offer visitors the chance to learn basic leather crafting techniques. Try your hand at simple stitching or embossing under the guidance of master craftsmen. This hands-on experience helps you appreciate the skill and patience required for leather work.</p></div><div class='feature'><h3>🛍️ Authentic Shopping</h3><p>Buy directly from workshops to ensure you get authentic, handcrafted leather products. Look for traditional mojris with intricate embroidery and comfortable fit. Many artisans also have stalls at local markets and craft fairs where you can meet them and learn their stories.</p></div><div class='feature'><h3>📸 Blue City Heritage</h3><p>Combine your visit to leather workshops with exploring Jodhpur's famous blue houses. The old city's architecture and craft traditions are intertwined, offering a complete cultural experience. Witness how traditional crafts continue to thrive in this historic setting.</p></div></div>",
+            "stats": {"workshops": "100+", "artisans": "400+", "products": "50+", "families": "80+", "export_destinations": "25+"}
+        },
+        "molela-terracotta": {
+            "title": "Molela - Terracotta Village",
+            "craft": "Terracotta Art",
+            "theme": {"primary": "#bf360c", "secondary": "#8d2e0b", "accent": "#e64a19"},
+            "images": [
+                {"url": "https://images.unsplash.com/photo-1588416478373-43d5c45eb12a?w=1200&h=800&fit=crop", "alt": "Terracotta Plaques", "caption": "Traditional terracotta plaques"},
+                {"url": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=800&fit=crop", "alt": "Molela Village", "caption": "Artisan workshop in Molela"},
+                {"url": "https://images.unsplash.com/photo-1539650116574-75c0c6d73669?w=1200&h=800&fit=crop", "alt": "Terracotta Artisan", "caption": "Crafting terracotta plaques"}
+            ],
+            "content": "<h2>Molela's Sacred Terracotta Art</h2><p>Molela village is famous for its unique flat-relief terracotta plaques depicting deities and rural life. These aren't just decorative—they're used in local temples and homes for worship, making them an integral part of religious and cultural life.</p><div class='content-features'><div class='feature'><h3>🙏 Sacred Art</h3><p>These terracotta plaques are created for local temples and homes, used in religious ceremonies and festivals. Each piece tells a story of devotion and connects communities to their spiritual heritage.</p></div><div class='feature'><h3>🌾 Rural Life</h3><p>The plaques depict scenes from rural Rajasthan—farmers, animals, and daily life—preserving stories that might otherwise be forgotten. They're visual narratives of village culture.</p></div><div class='feature'><h3>🏺 Traditional Craft</h3><p>Made from local clay, these plaques are sun-dried and then fired in traditional kilns. The craft has been passed down through generations, with each artisan adding their unique touch.</p></div></div>",
+            "moreInfo": "<h2 style='color: var(--city-primary, #bf360c); margin-bottom: 1.5rem;'>Visit Molela's Terracotta Village</h2><div class='content-features'><div class='feature'><h3>📍 Village Experience</h3><p>Molela is a small village where almost every household is involved in terracotta craft. Visit family workshops to see artisans creating plaques from local clay. The village offers an authentic rural Rajasthan experience, where you can witness the entire process from clay preparation to firing.</p></div><div class='feature'><h3>🎓 Learn the Sacred Craft</h3><p>Some artisans welcome visitors to observe and learn about terracotta plaque making. Understand the significance of different deities and motifs, and see how these sacred pieces are created with devotion. The craft is deeply connected to local religious practices and cultural beliefs.</p></div><div class='feature'><h3>🛍️ Sacred Art Shopping</h3><p>Purchase terracotta plaques directly from artisans in Molela. These pieces are not just decorative but hold religious significance. Buying directly supports the artisans and their families while ensuring you get authentic, handcrafted pieces made with traditional techniques.</p></div><div class='feature'><h3>📸 Cultural Heritage</h3><p>Visiting Molela offers insight into how traditional crafts are intertwined with religious and cultural practices. See how these plaques are used in local temples and homes, and understand their role in preserving rural Rajasthan's spiritual and cultural heritage.</p></div></div>",
+            "stats": {"artisans": "150+", "families": "80+", "generations": "15+"}
+        },
+        "udaipur-puppets": {
+            "title": "Udaipur - City of Lakes",
+            "craft": "Puppet Making",
+            "theme": {"primary": "#00acc1", "secondary": "#00838f", "accent": "#4dd0e1"},
+            "images": [
+                {"url": "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=1200&h=800&fit=crop", "alt": "Udaipur Lakes", "caption": "The beautiful lakes of Udaipur"},
+                {"url": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=800&fit=crop", "alt": "Puppet Making", "caption": "Traditional Kathputli puppets"},
+                {"url": "https://images.unsplash.com/photo-1588416478373-43d5c45eb12a?w=1200&h=800&fit=crop", "alt": "Puppet Show", "caption": "Puppet performance for locals"}
+            ],
+            "content": "<h2>City of Lakes' Puppet Art</h2><p>Udaipur, known as the City of Lakes for its stunning water bodies and palaces, is also famous for its traditional Kathputli (puppet) making. These colorful puppets are part of a living folk theater tradition.</p><div class='content-features'><div class='feature'><h3>🎭 Folk Theater</h3><p>Puppet shows are performed at local festivals and celebrations, telling stories from epics and local folklore. It's entertainment that brings communities together, preserving oral traditions through performance.</p></div><div class='feature'><h3>🎨 Handcrafted Details</h3><p>Each puppet is handcrafted with intricate costumes, expressions, and movable parts. The making process involves the whole family, with different members handling carving, painting, and costume making.</p></div><div class='feature'><h3>📖 Storytelling Tradition</h3><p>Puppeteers travel from village to village, performing stories that have been passed down for generations. The puppets are not just toys—they're vehicles for cultural preservation.</p></div></div>",
+            "enhancedDetails": "<h2 style='color: var(--city-primary, #00acc1); margin-bottom: 1.5rem;'>Cultural Performance & Artisan Life</h2><div class='content-features'><div class='feature'><h3>🎪 Performance Tradition</h3><p>Kathputli shows are an integral part of Rajasthani culture, performed at weddings, festivals, and village gatherings. Puppeteers, known as 'Bhats', travel with their families, carrying portable stages and puppets. The performances combine music, storytelling, and puppetry, creating an immersive experience that has entertained audiences for centuries.</p></div><div class='feature'><h3>🎨 Making Process</h3><p>Creating a puppet is a multi-step process involving wood carving, painting, and costume making. The head is carved from mango wood, painted with natural colors, and dressed in elaborate traditional costumes. Each puppet takes several days to complete, with different family members specializing in different aspects of the craft.</p></div><div class='feature'><h3>📚 Preserving Stories</h3><p>Puppet shows preserve stories from the Ramayana, Mahabharata, and local folklore. These performances are not just entertainment but also educational, teaching moral lessons and cultural values. The tradition helps maintain the oral history of Rajasthan, passing stories from one generation to the next.</p></div><div class='feature'><h3>🌐 Modern Challenges</h3><p>While puppet making continues, the craft faces challenges from modern entertainment. However, artisans are adapting by creating puppets for collectors, tourists, and cultural institutions. The craft is also gaining recognition as an art form, with puppeteers performing at cultural festivals and international events.</p></div></div>",
+            "moreInfo": "<h2 style='color: var(--city-primary, #00acc1); margin-bottom: 1.5rem;'>Experience Udaipur's Puppet Culture</h2><div class='content-features'><div class='feature'><h3>📍 Puppet Workshops & Shows</h3><p>Visit puppet workshops in Udaipur's old city where artisans create and perform with Kathputli puppets. Many workshops offer live puppet shows where you can watch traditional performances. The best time to visit is during festivals when puppet shows are more frequent. Some workshops are located near City Palace and offer daily performances for visitors.</p></div><div class='feature'><h3>🎓 Learn Puppet Making</h3><p>Some workshops offer visitors the opportunity to learn basic puppet making techniques. Try your hand at carving, painting, or costume making under the guidance of master puppeteers. This hands-on experience helps you appreciate the skill and artistry involved in creating these traditional puppets.</p></div><div class='feature'><h3>🛍️ Authentic Puppets</h3><p>Purchase handcrafted puppets directly from workshops to support local artisans. Look for puppets with traditional costumes and expressions. Many puppeteers also sell puppets at local markets and craft fairs. Buying directly ensures you get authentic pieces while supporting the preservation of this traditional craft.</p></div><div class='feature'><h3>📸 Cultural Shows</h3><p>Attend live puppet shows to experience this traditional form of entertainment. The performances combine music, storytelling, and puppetry, creating an immersive cultural experience. These shows are not just entertainment but also a way to preserve and share Rajasthani folklore and traditions.</p></div></div>",
+            "stats": {"workshops": "40+", "artisans": "120+", "puppets": "1000+", "performances_per_year": "500+", "villages_visited": "100+"}
+        },
+        "kishangarh-miniature": {
+            "title": "Kishangarh - Miniature Painting",
+            "craft": "Miniature Painting",
+            "theme": {"primary": "#7b1fa2", "secondary": "#6a1b9a", "accent": "#ab47bc"},
+            "images": [
+                {"url": "https://images.unsplash.com/photo-1588416478373-43d5c45eb12a?w=1200&h=800&fit=crop", "alt": "Miniature Painting", "caption": "Bani Thani style miniature painting"},
+                {"url": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=800&fit=crop", "alt": "Artist at Work", "caption": "Artist creating miniature painting"},
+                {"url": "https://images.unsplash.com/photo-1539650116574-75c0c6d73669?w=1200&h=800&fit=crop", "alt": "Fine Details", "caption": "Intricate details in miniature art"}
+            ],
+            "content": "<h2>Kishangarh's Miniature Masterpieces</h2><p>Kishangarh is famous for its distinct style of miniature painting, particularly the 'Bani Thani' style. These paintings require years of training and extreme precision, making them some of the finest examples of Indian miniature art.</p><div class='content-features'><div class='feature'><h3>🖌️ Fine Art</h3><p>Artists use single-hair brushes to create intricate details. A single painting can take months to complete, with each stroke carefully planned. The level of detail is extraordinary.</p></div><div class='feature'><h3>📚 Cultural Preservation</h3><p>These paintings preserve Rajasthani culture, depicting court life, festivals, and daily scenes from history. They're cultural documents as much as art, preserving stories for future generations.</p></div><div class='feature'><h3>🎨 Bani Thani Style</h3><p>The famous Bani Thani style is characterized by elongated eyes, sharp features, and rich colors. This style has become synonymous with Kishangarh miniature painting.</p></div></div>",
+            "moreInfo": "<h2 style='color: var(--city-primary, #7b1fa2); margin-bottom: 1.5rem;'>Discover Kishangarh Miniature Art</h2><div class='content-features'><div class='feature'><h3>📍 Art Studios & Galleries</h3><p>Visit art studios in Kishangarh where miniature painters work on their masterpieces. Many studios welcome visitors to observe artists at work, using single-hair brushes to create intricate details. The city has several galleries showcasing both traditional and contemporary miniature paintings in the Kishangarh style.</p></div><div class='feature'><h3>🎓 Art Appreciation</h3><p>Learn about the Bani Thani style and the techniques used in miniature painting. Some studios offer workshops where you can try basic painting techniques and understand the precision required. This experience helps you appreciate the skill and patience needed to create these fine artworks.</p></div><div class='feature'><h3>🛍️ Authentic Artworks</h3><p>Purchase miniature paintings directly from artists or reputable galleries in Kishangarh. Look for pieces in the traditional Bani Thani style with characteristic elongated eyes and rich colors. Buying directly from artists ensures authenticity and supports the preservation of this traditional art form.</p></div><div class='feature'><h3>📸 Cultural Heritage</h3><p>Kishangarh's miniature painting tradition is a significant part of Rajasthan's artistic heritage. Visiting studios and galleries offers insight into how this fine art form has been preserved and continues to evolve, maintaining its traditional techniques while adapting to contemporary tastes.</p></div></div>",
+            "stats": {"artists": "50+", "studios": "20+", "styles": "5+"}
+        },
+        "sikar-bandhani": {
+            "title": "Sikar - Bandhani Capital",
+            "craft": "Bandhani (Tie-Dye)",
+            "theme": {"primary": "#e91e63", "secondary": "#c2185b", "accent": "#f06292"},
+            "images": [
+                {"url": "https://images.unsplash.com/photo-1588416478373-43d5c45eb12a?w=1200&h=800&fit=crop", "alt": "Bandhani Fabric", "caption": "Colorful bandhani tie-dye fabric"},
+                {"url": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=800&fit=crop", "alt": "Tying Process", "caption": "Artisan tying fabric for bandhani"},
+                {"url": "https://images.unsplash.com/photo-1539650116574-75c0c6d73669?w=1200&h=800&fit=crop", "alt": "Bandhani Sarees", "caption": "Traditional bandhani sarees"}
+            ],
+            "content": "<h2>Sikar's Vibrant Bandhani Art</h2><p>Bandhani, or tie-dye, is a traditional textile art where fabric is tied in small knots before dyeing, creating intricate patterns. Sikar is known for its fine bandhani work, producing some of the most beautiful tie-dye fabrics in Rajasthan.</p><div class='content-features'><div class='feature'><h3>👗 Festival Wear</h3><p>Bandhani sarees and dupattas are essential for Rajasthani weddings and festivals. The patterns are passed down through families, each with its own meaning and significance in local culture.</p></div><div class='feature'><h3>👩‍👩‍👧‍👦 Women's Craft</h3><p>Traditionally practiced by women, bandhani is often a family activity, with multiple generations working together to create elaborate patterns. It's a social craft that brings women together.</p></div><div class='feature'><h3>🎨 Colorful Patterns</h3><p>The tying and dyeing process creates beautiful, symmetrical patterns. Each knot is carefully placed, and the dyeing process requires skill to achieve the perfect colors and patterns.</p></div></div>",
+            "moreInfo": "<h2 style='color: var(--city-primary, #e91e63); margin-bottom: 1.5rem;'>Experience Sikar's Bandhani Craft</h2><div class='content-features'><div class='feature'><h3>📍 Family Workshops</h3><p>Visit family-run bandhani workshops in Sikar where women work together to create tie-dye fabrics. These workshops offer an authentic experience of this traditional craft, where you can see the entire process from tying knots to dyeing and finishing. The social aspect of the craft is evident as multiple generations work together.</p></div><div class='feature'><h3>🎓 Learn Tie-Dye Techniques</h3><p>Some workshops offer visitors the chance to try basic bandhani techniques. Learn how to tie knots, understand pattern placement, and see the dyeing process. This hands-on experience helps you appreciate the skill and precision required to create these beautiful patterns.</p></div><div class='feature'><h3>🛍️ Authentic Bandhani Shopping</h3><p>Purchase bandhani sarees, dupattas, and fabrics directly from workshops in Sikar. Look for pieces with traditional patterns and vibrant colors. Buying directly from artisans ensures you get authentic, handcrafted bandhani while supporting local families who have practiced this craft for generations.</p></div><div class='feature'><h3>📸 Women's Craft Heritage</h3><p>Bandhani is a craft traditionally practiced by women, and visiting Sikar offers insight into how this art form has been preserved through generations of women. See how patterns are passed down from mothers to daughters, and understand the cultural significance of these textiles in Rajasthani weddings and festivals.</p></div></div>",
+            "stats": {"artisans": "300+", "families": "150+", "patterns": "200+"}
+        },
+        "alwar-metalwork": {
+            "title": "Alwar - Metal Craft City",
+            "craft": "Metal Work",
+            "theme": {"primary": "#ff6f00", "secondary": "#e65100", "accent": "#ffb74d"},
+            "images": [
+                {"url": "https://images.unsplash.com/photo-1588416478373-43d5c45eb12a?w=1200&h=800&fit=crop", "alt": "Brass Work", "caption": "Traditional brass utensils"},
+                {"url": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=800&fit=crop", "alt": "Metal Artisan", "caption": "Artisan hammering metal"},
+                {"url": "https://images.unsplash.com/photo-1539650116574-75c0c6d73669?w=1200&h=800&fit=crop", "alt": "Copper Vessels", "caption": "Handcrafted copper vessels"}
+            ],
+            "content": "<h2>Alwar's Shining Metal Craft</h2><p>Alwar's metalworkers create everything from traditional utensils to decorative items using brass and copper. The craft has been part of the city's identity for centuries, with artisans producing both functional and decorative pieces.</p><div class='content-features'><div class='feature'><h3>🍲 Daily Utensils</h3><p>Brass and copper utensils made here are used in daily cooking and religious ceremonies. They're considered auspicious and are passed down through families as heirlooms.</p></div><div class='feature'><h3>🔨 Traditional Techniques</h3><p>Artisans use age-old techniques of hammering and shaping metal by hand, creating pieces that are both functional and beautiful. The process requires skill and patience.</p></div><div class='feature'><h3>✨ Decorative Items</h3><p>Beyond utensils, artisans create decorative items like lamps, statues, and home decor. Each piece reflects traditional designs while meeting modern needs.</p></div></div>",
+            "moreInfo": "<h2 style='color: var(--city-primary, #ff6f00); margin-bottom: 1.5rem;'>Explore Alwar's Metal Craft</h2><div class='content-features'><div class='feature'><h3>📍 Metal Workshops</h3><p>Visit metal workshops in Alwar where artisans work with brass and copper. Watch them hammer, shape, and polish metal using traditional techniques. Many workshops are located in the old city and welcome visitors to observe the craft process. The sound of hammers and the glow of metal create an authentic workshop atmosphere.</p></div><div class='feature'><h3>🎓 Learn Metal Crafting</h3><p>Some workshops offer visitors the opportunity to try basic metal crafting techniques. Learn about hammering, shaping, and polishing under the guidance of master craftsmen. This hands-on experience helps you appreciate the skill and strength required to work with metal.</p></div><div class='feature'><h3>🛍️ Authentic Metal Products</h3><p>Purchase brass and copper utensils, lamps, and decorative items directly from workshops in Alwar. Look for pieces with traditional designs and quality craftsmanship. Buying directly from artisans ensures you get authentic, handcrafted metal products while supporting local craftsmen.</p></div><div class='feature'><h3>📸 Traditional Craft Heritage</h3><p>Alwar's metal craft has been part of the city's identity for centuries. Visiting workshops offers insight into how traditional techniques have been preserved and continue to be used to create both functional and decorative items. See how artisans balance tradition with modern market demands.</p></div></div>",
+            "stats": {"workshops": "60+", "artisans": "200+", "products": "100+"}
+        },
+        "shekhawati-wood": {
+            "title": "Shekhawati - Wood Carving Region",
+            "craft": "Wood Carving",
+            "theme": {"primary": "#8d6e63", "secondary": "#6d4c41", "accent": "#a1887f"},
+            "images": [
+                {"url": "https://images.unsplash.com/photo-1588416478373-43d5c45eb12a?w=1200&h=800&fit=crop", "alt": "Wood Carving", "caption": "Intricate wood carvings on haveli"},
+                {"url": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=800&fit=crop", "alt": "Haveli Architecture", "caption": "Carved wooden doors and windows"},
+                {"url": "https://images.unsplash.com/photo-1539650116574-75c0c6d73669?w=1200&h=800&fit=crop", "alt": "Wood Carver", "caption": "Artisan carving wood"}
+            ],
+            "content": "<h2>Shekhawati's Carved Heritage</h2><p>Shekhawati region is famous for its intricate wood carvings seen in havelis (mansions) and temples. The craft continues in furniture and decorative items, preserving the region's architectural heritage.</p><div class='content-features'><div class='feature'><h3>🏛️ Architectural Heritage</h3><p>The region's havelis feature elaborate wood carvings on doors, windows, and pillars. These carvings tell stories and showcase the skill of local artisans. Each haveli is a work of art.</p></div><div class='feature'><h3>🪑 Modern Applications</h3><p>Today, artisans create furniture and home decor items using traditional techniques, keeping the craft alive while adapting to modern needs. The carvings preserve traditional motifs.</p></div><div class='feature'><h3>🌳 Traditional Materials</h3><p>Artisans work with local woods, using traditional tools and techniques. The carvings feature floral patterns, geometric designs, and scenes from mythology and daily life.</p></div></div>",
+            "moreInfo": "<h2 style='color: var(--city-primary, #8d6e63); margin-bottom: 1.5rem;'>Discover Shekhawati's Wood Carving</h2><div class='content-features'><div class='feature'><h3>📍 Havelis & Workshops</h3><p>Explore the magnificent havelis of Shekhawati region to see intricate wood carvings on doors, windows, and pillars. Visit wood carving workshops where artisans create furniture and decorative items using traditional techniques. The region's towns like Mandawa, Nawalgarh, and Fatehpur are known for their carved havelis and active workshops.</p></div><div class='feature'><h3>🎓 Learn Wood Carving</h3><p>Some workshops offer visitors the chance to learn basic wood carving techniques. Try your hand at carving traditional motifs under the guidance of master craftsmen. This experience helps you appreciate the precision and skill required to create these intricate carvings.</p></div><div class='feature'><h3>🛍️ Carved Furniture & Decor</h3><p>Purchase handcrafted wooden furniture and decorative items directly from workshops in Shekhawati. Look for pieces with traditional motifs and quality craftsmanship. Buying directly from artisans ensures you get authentic, handcrafted items while supporting the preservation of this traditional craft.</p></div><div class='feature'><h3>📸 Architectural Heritage Tour</h3><p>Combine your visit to workshops with exploring Shekhawati's famous painted havelis. The region offers a unique opportunity to see how wood carving has been an integral part of architectural heritage. Witness how traditional techniques continue to be used in both restoration and new creations.</p></div></div>",
+            "stats": {"artisans": "180+", "workshops": "45+", "techniques": "20+"}
+        },
+        "makrana-marble": {
+            "title": "Makrana - Marble Capital",
+            "craft": "Marble Work",
+            "theme": {"primary": "#eceff1", "secondary": "#b0bec5", "accent": "#ffffff"},
+            "images": [
+                {"url": "https://images.unsplash.com/photo-1588416478373-43d5c45eb12a?w=1200&h=800&fit=crop", "alt": "Marble Quarry", "caption": "Makrana marble quarries"},
+                {"url": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=800&fit=crop", "alt": "Marble Carving", "caption": "Artisan carving marble"},
+                {"url": "https://images.unsplash.com/photo-1539650116574-75c0c6d73669?w=1200&h=800&fit=crop", "alt": "Marble Statues", "caption": "Handcrafted marble statues"}
+            ],
+            "content": "<h2>Makrana's Marble Legacy</h2><p>Makrana is the source of the famous white marble used in the Taj Mahal. Local artisans continue to work with marble, creating everything from statues to home decor, preserving a craft that has shaped India's architectural heritage.</p><div class='content-features'><div class='feature'><h3>🏛️ Historical Significance</h3><p>Makrana marble has been used in India's most famous monuments, including the Taj Mahal. The town's quarries and workshops have been operating for centuries, providing marble for royal buildings.</p></div><div class='feature'><h3>👨‍🎨 Local Artisans</h3><p>While large monuments use Makrana marble, local artisans create smaller items—statues, tabletops, and decorative pieces for homes and temples. Each piece showcases the marble's beauty.</p></div><div class='feature'><h3>⛏️ Quarry to Workshop</h3><p>The process from quarry to finished product involves skilled artisans who know how to work with marble's unique properties. The craft requires both artistic skill and technical knowledge.</p></div></div>",
+            "moreInfo": "<h2 style='color: var(--city-primary, #eceff1); margin-bottom: 1.5rem;'>Visit Makrana's Marble Heritage</h2><div class='content-features'><div class='feature'><h3>📍 Quarries & Workshops</h3><p>Visit Makrana's marble quarries and workshops to see where the famous white marble comes from. Watch artisans carve and polish marble using traditional techniques. Many workshops welcome visitors to observe the craft process, from rough stone to finished product. The town's connection to the Taj Mahal makes it a significant destination for marble enthusiasts.</p></div><div class='feature'><h3>🎓 Marble Crafting Experience</h3><p>Some workshops offer visitors the opportunity to try basic marble carving techniques. Learn about the tools and methods used to work with marble under the guidance of experienced craftsmen. This hands-on experience helps you appreciate the skill required to transform raw marble into beautiful objects.</p></div><div class='feature'><h3>🛍️ Authentic Marble Products</h3><p>Purchase handcrafted marble statues, tabletops, and decorative items directly from workshops in Makrana. Look for pieces that showcase the marble's natural beauty and quality craftsmanship. Buying directly from artisans ensures you get authentic Makrana marble products while supporting local craftsmen.</p></div><div class='feature'><h3>📸 Historical Legacy</h3><p>Makrana's marble has been used in India's most famous monuments, including the Taj Mahal. Visiting the quarries and workshops offers insight into how this marble has shaped India's architectural heritage. See how traditional techniques continue to be used alongside modern methods to create both monumental and everyday items.</p></div></div>",
+            "stats": {"quarries": "100+", "artisans": "500+", "generations": "20+"}
+        },
+        "barmer-embroidery": {
+            "title": "Barmer - Embroidery Capital",
+            "craft": "Embroidery",
+            "theme": {"primary": "#ff5722", "secondary": "#d84315", "accent": "#ff8a65"},
+            "images": [
+                {"url": "https://images.unsplash.com/photo-1588416478373-43d5c45eb12a?w=1200&h=800&fit=crop", "alt": "Embroidery Work", "caption": "Intricate embroidery patterns"},
+                {"url": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=800&fit=crop", "alt": "Women Embroidering", "caption": "Women working on embroidery"},
+                {"url": "https://images.unsplash.com/photo-1539650116574-75c0c6d73669?w=1200&h=800&fit=crop", "alt": "Embroidery Patterns", "caption": "Colorful embroidery designs"}
+            ],
+            "content": "<h2>Barmer's Vibrant Embroidery</h2><p>Barmer's embroidery is known for its bold patterns and bright colors. Women create intricate designs on fabrics, creating clothing and home textiles that reflect the vibrant culture of the Thar Desert region.</p><div class='content-features'><div class='feature'><h3>👩‍🦱 Women's Art</h3><p>Embroidery is traditionally done by women, often as a group activity. Patterns are learned from mothers and grandmothers, preserving family traditions and creating bonds between generations.</p></div><div class='feature'><h3>🌵 Cultural Identity</h3><p>The embroidery patterns reflect Barmer's desert culture, with motifs inspired by local flora, fauna, and daily life in the Thar Desert. Each pattern tells a story.</p></div><div class='feature'><h3>🎨 Bold Designs</h3><p>Barmer embroidery is known for its bold, geometric patterns and bright colors. The designs are distinctive, making Barmer embroidery easily recognizable.</p></div></div>",
+            "moreInfo": "<h2 style='color: var(--city-primary, #ff5722); margin-bottom: 1.5rem;'>Experience Barmer's Embroidery</h2><div class='content-features'><div class='feature'><h3>📍 Women's Workshops</h3><p>Visit women's embroidery workshops in Barmer and surrounding villages where artisans create vibrant embroidered textiles. These workshops often operate as group activities, where women work together while sharing stories and preserving traditional patterns. The social aspect of the craft is an important part of the experience.</p></div><div class='feature'><h3>🎓 Learn Embroidery Techniques</h3><p>Some workshops offer visitors the opportunity to learn basic embroidery techniques. Try your hand at creating traditional Barmer patterns under the guidance of skilled artisans. This hands-on experience helps you appreciate the skill and patience required to create these intricate designs.</p></div><div class='feature'><h3>🛍️ Authentic Embroidered Textiles</h3><p>Purchase embroidered clothing, home textiles, and accessories directly from workshops in Barmer. Look for pieces with traditional bold patterns and bright colors that reflect the Thar Desert culture. Buying directly from artisans ensures you get authentic, handcrafted embroidery while supporting local women and their families.</p></div><div class='feature'><h3>📸 Desert Culture Heritage</h3><p>Barmer's embroidery reflects the vibrant culture of the Thar Desert region. Visiting workshops offers insight into how traditional patterns are preserved and passed down through generations of women. See how motifs inspired by desert life are incorporated into beautiful textile designs.</p></div></div>",
+            "stats": {"artisans": "400+", "villages": "30+", "patterns": "150+"}
+        },
+        "bikaner-camel-leather": {
+            "title": "Bikaner - Camel Leather City",
+            "craft": "Camel Leather Work",
+            "theme": {"primary": "#795548", "secondary": "#5d4037", "accent": "#a1887f"},
+            "images": [
+                {"url": "https://images.unsplash.com/photo-1588416478373-43d5c45eb12a?w=1200&h=800&fit=crop", "alt": "Camel Leather", "caption": "Camel leather products"},
+                {"url": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=800&fit=crop", "alt": "Leather Workshop", "caption": "Artisan working with camel leather"},
+                {"url": "https://images.unsplash.com/photo-1539650116574-75c0c6d73669?w=1200&h=800&fit=crop", "alt": "Leather Bags", "caption": "Handcrafted camel leather bags"}
+            ],
+            "content": "<h2>Bikaner's Desert Leather Craft</h2><p>Bikaner is famous for its camel leather products. Artisans create everything from traditional water bags to modern accessories using techniques passed down through generations, adapting traditional craft to contemporary needs.</p><div class='content-features'><div class='feature'><h3>💧 Traditional Uses</h3><p>Camel leather was traditionally used for water bags and saddles, essential items for desert life. Today, artisans create bags, belts, and footwear while maintaining traditional quality and durability.</p></div><div class='feature'><h3>🐪 Desert Craft</h3><p>This craft is uniquely suited to the desert region, where camels are an integral part of life. The leather is known for its durability and unique texture, perfect for harsh desert conditions.</p></div><div class='feature'><h3>👝 Modern Products</h3><p>While maintaining traditional techniques, artisans now create modern products like wallets, bags, and accessories. The craft continues to evolve while preserving its desert heritage.</p></div></div>",
+            "moreInfo": "<h2 style='color: var(--city-primary, #795548); margin-bottom: 1.5rem;'>Discover Bikaner's Camel Leather</h2><div class='content-features'><div class='feature'><h3>📍 Leather Workshops</h3><p>Visit camel leather workshops in Bikaner where artisans create traditional and modern leather products. Watch them work with camel leather, known for its durability and unique texture. Many workshops are located in the old city and welcome visitors to observe the craft process. The connection to desert life makes this craft unique to the region.</p></div><div class='feature'><h3>🎓 Learn Leather Crafting</h3><p>Some workshops offer visitors the opportunity to try basic leather crafting techniques. Learn about working with camel leather, stitching, and finishing under the guidance of master craftsmen. This hands-on experience helps you appreciate the skill required to create durable leather products.</p></div><div class='feature'><h3>🛍️ Authentic Leather Products</h3><p>Purchase camel leather bags, belts, wallets, and traditional water bags directly from workshops in Bikaner. Look for pieces that showcase the leather's natural texture and quality craftsmanship. Buying directly from artisans ensures you get authentic, handcrafted camel leather products while supporting local craftsmen.</p></div><div class='feature'><h3>📸 Desert Heritage</h3><p>Bikaner's camel leather craft is deeply connected to the desert region's way of life. Visiting workshops offers insight into how traditional techniques have been adapted to create modern products while preserving the craft's desert heritage. See how artisans balance tradition with contemporary market demands.</p></div></div>",
+            "stats": {"workshops": "70+", "artisans": "250+", "products": "80+"}
+        },
+        "jaisalmer-stone": {
+            "title": "Jaisalmer - The Golden City",
+            "craft": "Stone Carving",
+            "theme": {"primary": "#ffb300", "secondary": "#ff8f00", "accent": "#ffd54f"},
+            "images": [
+                {"url": "https://images.unsplash.com/photo-1588416478373-43d5c45eb12a?w=1200&h=800&fit=crop", "alt": "Jaisalmer Fort", "caption": "The Golden Fort of Jaisalmer"},
+                {"url": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=800&fit=crop", "alt": "Stone Carving", "caption": "Intricate stone carvings on golden sandstone"},
+                {"url": "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=1200&h=800&fit=crop", "alt": "Sandstone Artisan", "caption": "Artisan carving golden sandstone"}
+            ],
+            "content": "<h2>The Golden City's Stone Art</h2><p>Jaisalmer, known as the Golden City for its yellow sandstone architecture that glows like gold in the sunlight, is famous for its stone carving. The entire city appears golden, especially during sunrise and sunset.</p><div class='content-features'><div class='feature'><h3>🏰 Golden Architecture</h3><p>Jaisalmer's golden yellow sandstone is unique to the region. The stone carvings on the fort and havelis showcase incredible skill. Every building tells a story through its intricate carvings.</p></div><div class='feature'><h3>🛠️ Traditional Techniques</h3><p>Artisans use age-old techniques passed down through generations. The golden stone is soft when quarried, making it ideal for intricate carvings that harden over time.</p></div><div class='feature'><h3>✨ Modern Applications</h3><p>Today, artisans create smaller items—lamp bases, coasters, and decorative pieces—using traditional carving techniques. The golden hue makes each piece unique and beautiful.</p></div></div>",
+            "moreInfo": "<h2 style='color: var(--city-primary, #ffb300); margin-bottom: 1.5rem;'>Explore Jaisalmer's Golden Stone</h2><div class='content-features'><div class='feature'><h3>📍 Fort & Workshops</h3><p>Explore Jaisalmer Fort and the old city to see magnificent golden sandstone carvings on buildings. Visit stone carving workshops where artisans work with the unique golden yellow sandstone. Many workshops are located in the old city and welcome visitors to observe the craft process. The fort itself is a masterpiece of stone carving.</p></div><div class='feature'><h3>🎓 Learn Stone Carving</h3><p>Some workshops offer visitors the opportunity to try basic stone carving techniques. Learn about working with golden sandstone, carving tools, and traditional patterns under the guidance of master craftsmen. This hands-on experience helps you appreciate the skill required to create intricate carvings.</p></div><div class='feature'><h3>🛍️ Golden Stone Products</h3><p>Purchase handcrafted golden sandstone items like lamp bases, coasters, and decorative pieces directly from workshops in Jaisalmer. Look for pieces that showcase the stone's unique golden hue and intricate carvings. Buying directly from artisans ensures you get authentic, handcrafted golden stone products while supporting local craftsmen.</p></div><div class='feature'><h3>📸 Golden City Heritage</h3><p>Jaisalmer's golden sandstone architecture is what gives the city its nickname. Visiting workshops and exploring the fort offers insight into how this unique stone has shaped the city's identity. See how traditional carving techniques continue to be used to create both architectural elements and decorative items.</p></div></div>",
+            "stats": {"artisans": "150+", "workshops": "40+", "techniques": "15+"}
+        },
+        "nathdwara-pichwai": {
+            "title": "Nathdwara - Pichwai Art Center",
+            "craft": "Pichwai Painting",
+            "theme": {"primary": "#4caf50", "secondary": "#388e3c", "accent": "#81c784"},
+            "images": [
+                {"url": "https://images.unsplash.com/photo-1588416478373-43d5c45eb12a?w=1200&h=800&fit=crop", "alt": "Pichwai Painting", "caption": "Large pichwai painting of Krishna"},
+                {"url": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=800&fit=crop", "alt": "Temple Art", "caption": "Pichwai paintings in temple"},
+                {"url": "https://images.unsplash.com/photo-1539650116574-75c0c6d73669?w=1200&h=800&fit=crop", "alt": "Artist at Work", "caption": "Artist creating pichwai painting"}
+            ],
+            "content": "<h2>Nathdwara's Devotional Pichwai Art</h2><p>Pichwai paintings are large cloth paintings hung behind idols in temples. Nathdwara is the center of this devotional art form, with artists creating intricate depictions of Krishna that are integral to temple worship.</p><div class='content-features'><div class='feature'><h3>🙏 Devotional Art</h3><p>These paintings are created for temples, depicting scenes from Krishna's life. They're changed according to seasons and festivals, making them a living tradition that connects devotees to the divine.</p></div><div class='feature'><h3>🕌 Religious Significance</h3><p>Pichwai paintings are an integral part of temple worship in Nathdwara. Artists work with devotion, considering the craft a form of prayer and spiritual practice.</p></div><div class='feature'><h3>🎨 Intricate Details</h3><p>Each painting is meticulously detailed, with every element carefully planned. The paintings can take months to complete, requiring both artistic skill and spiritual devotion.</p></div></div>",
+            "moreInfo": "<h2 style='color: var(--city-primary, #4caf50); margin-bottom: 1.5rem;'>Experience Nathdwara's Pichwai Art</h2><div class='content-features'><div class='feature'><h3>📍 Art Studios & Temple</h3><p>Visit Pichwai art studios in Nathdwara where artists create these devotional paintings. Many studios welcome visitors to observe artists at work, creating intricate depictions of Krishna. Visit the famous Shrinathji Temple to see Pichwai paintings in their religious context, hung behind the deity and changed according to seasons and festivals.</p></div><div class='feature'><h3>🎓 Learn Pichwai Painting</h3><p>Some studios offer visitors the opportunity to learn about Pichwai painting techniques and their religious significance. Understand the devotional aspect of the craft and the precision required to create these intricate paintings. This experience helps you appreciate both the artistic skill and spiritual devotion involved.</p></div><div class='feature'><h3>🛍️ Authentic Pichwai Art</h3><p>Purchase Pichwai paintings directly from artists or reputable studios in Nathdwara. Look for pieces that reflect traditional styles and devotional themes. Buying directly from artists ensures authenticity and supports the preservation of this devotional art form. Many artists also create smaller pieces suitable for home display.</p></div><div class='feature'><h3>📸 Devotional Heritage</h3><p>Nathdwara's Pichwai art is deeply connected to temple worship and devotional practices. Visiting studios and the temple offers insight into how this art form serves both religious and artistic purposes. See how paintings are created with devotion and used to enhance the spiritual experience of devotees.</p></div></div>",
+            "stats": {"artists": "80+", "studios": "25+", "paintings": "500+"}
+        },
+        "shahpura-phad": {
+            "title": "Shahpura - Phad Painting Heritage",
+            "craft": "Phad Painting",
+            "theme": {"primary": "#f57c00", "secondary": "#e65100", "accent": "#ffb74d"},
+            "images": [
+                {"url": "https://images.unsplash.com/photo-1588416478373-43d5c45eb12a?w=1200&h=800&fit=crop", "alt": "Phad Scroll", "caption": "Traditional phad scroll painting"},
+                {"url": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=800&fit=crop", "alt": "Storytelling", "caption": "Bhopa performing with phad"},
+                {"url": "https://images.unsplash.com/photo-1539650116574-75c0c6d73669?w=1200&h=800&fit=crop", "alt": "Folk Tale", "caption": "Phad painting depicting folk tale"}
+            ],
+            "content": "<h2>Shahpura's Storytelling Phad Art</h2><p>Phad paintings are scroll paintings used by Bhopa (priest-singers) to narrate folk tales. These large cloth paintings depict epic stories and are central to Rajasthani folk culture, preserving oral traditions through visual art.</p><div class='content-features'><div class='feature'><h3>📖 Storytelling Art</h3><p>Phad paintings are used in performances where Bhopas narrate stories while pointing to different parts of the painting. It's a unique form of visual storytelling that brings epics to life.</p></div><div class='feature'><h3>🎭 Folk Tradition</h3><p>This art form preserves Rajasthani folk tales and legends. The paintings are created on long cloth scrolls, with each section telling part of the story, creating a narrative journey.</p></div><div class='feature'><h3>👨‍🎨 Family Art</h3><p>Phad painting is a family tradition, with specific families specializing in creating these scrolls. The craft is passed down through generations, preserving both technique and stories.</p></div></div>",
+            "moreInfo": "<h2 style='color: var(--city-primary, #f57c00); margin-bottom: 1.5rem;'>Discover Shahpura's Phad Art</h2><div class='content-features'><div class='feature'><h3>📍 Family Studios & Performances</h3><p>Visit Phad painting studios in Shahpura where families create these storytelling scrolls. Many studios welcome visitors to observe artists at work, creating large cloth paintings that tell epic stories. Look for opportunities to see Bhopa performances where these scrolls are used to narrate folk tales, bringing the art form to life.</p></div><div class='feature'><h3>🎓 Learn Phad Painting</h3><p>Some studios offer visitors the opportunity to learn about Phad painting techniques and the stories they depict. Understand how these scrolls are used in storytelling performances and the narrative structure of the paintings. This experience helps you appreciate both the artistic skill and storytelling tradition.</p></div><div class='feature'><h3>🛍️ Authentic Phad Art</h3><p>Purchase Phad paintings directly from artists or family studios in Shahpura. Look for pieces that depict traditional folk tales and epic stories. Buying directly from artists ensures authenticity and supports the preservation of this unique storytelling art form. Many artists also create smaller pieces suitable for display.</p></div><div class='feature'><h3>📸 Storytelling Heritage</h3><p>Shahpura's Phad art is a unique form of visual storytelling that preserves Rajasthani folk culture. Visiting studios and witnessing performances offers insight into how oral traditions are preserved through visual art. See how Bhopas use these scrolls to bring epic stories to life for audiences.</p></div></div>",
+            "stats": {"artists": "30+", "families": "10+", "stories": "20+"}
+        },
+        "pushkar-jewelry": {
+            "title": "Pushkar - Silver Jewelry Hub",
+            "craft": "Silver Jewelry",
+            "theme": {"primary": "#9e9e9e", "secondary": "#757575", "accent": "#e0e0e0"},
+            "images": [
+                {"url": "https://images.unsplash.com/photo-1588416478373-43d5c45eb12a?w=1200&h=800&fit=crop", "alt": "Silver Jewelry", "caption": "Traditional silver jewelry"},
+                {"url": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=800&fit=crop", "alt": "Jewelry Making", "caption": "Artisan crafting silver jewelry"},
+                {"url": "https://images.unsplash.com/photo-1539650116574-75c0c6d73669?w=1200&h=800&fit=crop", "alt": "Pushkar Market", "caption": "Silver jewelry in Pushkar market"}
+            ],
+            "content": "<h2>Pushkar's Shining Silver Craft</h2><p>Pushkar is known for its traditional silver jewelry, especially the elaborate necklaces and anklets worn by local women. The craft combines traditional designs with skilled craftsmanship, creating pieces that are both beautiful and culturally significant.</p><div class='content-features'><div class='feature'><h3>💎 Traditional Designs</h3><p>The jewelry features traditional Rajasthani motifs and designs passed down through generations. Each piece is handcrafted with intricate details, making it unique and special.</p></div><div class='feature'><h3>🎉 Festival Wear</h3><p>Silver jewelry is an essential part of traditional attire, especially during festivals and weddings. The pieces are often family heirlooms passed down through generations, carrying emotional and cultural value.</p></div><div class='feature'><h3>🔧 Skilled Craftsmanship</h3><p>Artisans use traditional techniques like filigree work, engraving, and stone setting. Each piece requires skill and patience, with some pieces taking days or weeks to complete.</p></div></div>",
+            "moreInfo": "<h2 style='color: var(--city-primary, #9e9e9e); margin-bottom: 1.5rem;'>Explore Pushkar's Silver Jewelry</h2><div class='content-features'><div class='feature'><h3>📍 Jewelry Workshops & Market</h3><p>Visit silver jewelry workshops in Pushkar where artisans create traditional Rajasthani jewelry. Many workshops are located in the old city and welcome visitors to observe the craft process. Explore Pushkar's famous market where you can find a wide variety of silver jewelry, from traditional pieces to contemporary designs. The town's spiritual atmosphere adds to the experience.</p></div><div class='feature'><h3>🎓 Learn Jewelry Making</h3><p>Some workshops offer visitors the opportunity to learn basic silver jewelry making techniques. Try your hand at filigree work, engraving, or stone setting under the guidance of master craftsmen. This hands-on experience helps you appreciate the skill and precision required to create intricate jewelry pieces.</p></div><div class='feature'><h3>🛍️ Authentic Silver Jewelry</h3><p>Purchase traditional silver jewelry directly from workshops or reputable shops in Pushkar. Look for pieces with traditional Rajasthani motifs, filigree work, and quality craftsmanship. Buying directly from artisans ensures you get authentic, handcrafted silver jewelry while supporting local craftsmen. The market offers a wide selection for different tastes and budgets.</p></div><div class='feature'><h3>📸 Cultural Significance</h3><p>Pushkar's silver jewelry is deeply connected to Rajasthani culture and traditions. Visiting workshops and the market offers insight into how traditional designs are preserved and adapted. See how jewelry serves both decorative and cultural purposes, especially during festivals and weddings. The craft continues to thrive in this spiritual town.</p></div></div>",
+            "stats": {"workshops": "50+", "artisans": "200+", "designs": "100+"}
+        },
+        "dungarpur-stone": {
+            "title": "Dungarpur - Stone Carving Legacy",
+            "craft": "Stone Carving",
+            "theme": {"primary": "#9e9e9e", "secondary": "#616161", "accent": "#bdbdbd"},
+            "images": [
+                {"url": "https://images.unsplash.com/photo-1588416478373-43d5c45eb12a?w=1200&h=800&fit=crop", "alt": "Stone Carving", "caption": "Intricate stone carvings"},
+                {"url": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=800&fit=crop", "alt": "Stone Sculpture", "caption": "Handcrafted stone sculptures"},
+                {"url": "https://images.unsplash.com/photo-1539650116574-75c0c6d73669?w=1200&h=800&fit=crop", "alt": "Stone Artisan", "caption": "Artisan carving stone"}
+            ],
+            "content": "<h2>Dungarpur's Stone Carving Heritage</h2><p>Dungarpur is known for its skilled stone carvers who create everything from architectural elements to decorative items. The craft has been part of the region's heritage for centuries, with artisans working on both traditional and modern projects.</p><div class='content-features'><div class='feature'><h3>🏛️ Architectural Craft</h3><p>Stone carvers here have worked on palaces and temples, creating intricate patterns and sculptures. The skill is passed down through families, with each generation refining the techniques.</p></div><div class='feature'><h3>🪨 Traditional Materials</h3><p>Artisans work with local stone, using traditional tools and techniques. The stone is carefully selected and carved to bring out its natural beauty and texture.</p></div><div class='feature'><h3>✨ Modern Adaptations</h3><p>While traditional architectural work continues, artisans also create smaller decorative items and sculptures for homes and gardens, keeping the craft relevant and accessible.</p></div></div>",
+            "moreInfo": "<h2 style='color: var(--city-primary, #9e9e9e); margin-bottom: 1.5rem;'>Visit Dungarpur's Stone Carving</h2><div class='content-features'><div class='feature'><h3>📍 Workshops & Palaces</h3><p>Visit stone carving workshops in Dungarpur where artisans create architectural elements and decorative items. Explore the region's palaces and temples to see examples of traditional stone carving work. Many workshops welcome visitors to observe the craft process, from selecting stone to creating intricate carvings. The region's architectural heritage showcases the skill of local stone carvers.</p></div><div class='feature'><h3>🎓 Learn Stone Carving</h3><p>Some workshops offer visitors the opportunity to try basic stone carving techniques. Learn about working with local stone, carving tools, and traditional patterns under the guidance of master craftsmen. This hands-on experience helps you appreciate the skill and precision required to create intricate stone carvings.</p></div><div class='feature'><h3>🛍️ Authentic Stone Products</h3><p>Purchase handcrafted stone items like sculptures, decorative pieces, and architectural elements directly from workshops in Dungarpur. Look for pieces that showcase the stone's natural beauty and quality craftsmanship. Buying directly from artisans ensures you get authentic, handcrafted stone products while supporting local craftsmen.</p></div><div class='feature'><h3>📸 Architectural Heritage</h3><p>Dungarpur's stone carving has been part of the region's architectural heritage for centuries. Visiting workshops and exploring palaces offers insight into how traditional techniques continue to be used in both restoration and new creations. See how artisans balance traditional architectural work with modern decorative items.</p></div></div>",
+            "stats": {"artisans": "120+", "workshops": "35+", "generations": "12+"}
+        }
+    }
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>
